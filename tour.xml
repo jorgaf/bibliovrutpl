@@ -84,7 +84,7 @@
 			<cube url="panos/IMG_20220906_101218_00_089.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
 		
-		<hotspot name="h1_exterior_1" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" scale="0.1" distorted="true"  ath="0" atv="0" onclick="loadscene (scene_exterior_2)" handcursor="false"/>
+		<hotspot name="h1_exterior_1" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" scale="0.1" distorted="true"  ath="0" atv="0" onclick="loadscene(scene_exterior_2)" handcursor="false"/>
 
 	</scene>
 
@@ -128,12 +128,63 @@
 		<image>
 			<cube url="panos/IMG_20220906_101629_00_092.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
-		<hotspot  name="h1_ingreso" >
+		<!--
+		<hotspot  name="h1_ingreso" style="img1" onclick="comienza_carrusel_h1_ingreso()" onover="tween(scale, 0.6, 0.6, easeoutback); tween(rz, 21, 0.4, easeoutback);"
+        onout="tween(scale, 1, 1); tween(rz, 0, 0.6);">
 		    <point ath="2.4863285325210427" atv="7.140378442635889" />
 		    <point ath="9.128980446652179" atv="7.155493465747626" />
 		    <point ath="9.132819034554132" atv="11.583451652216459" />
 		    <point ath="2.3289181311704397" atv="11.26571860019484" />
-		</hotspot>
+		</hotspot> -->
+			<hotspot name="img1" ath="240" atv="0"  zorder="1" url="resources/lupa.png"  style="img1" rotate="360" title=""  onclick="comienza_carrusel_img1 ()" onover="tween(scale, 0.6, 0.6, easeoutback); tween(rz, 21, 0.4, easeoutback);"
+			        onout="tween(scale, 1, 1); tween(rz, 0, 0.6);"  />
+			
+		<hotspot name="img1_carrusel" style="img1"
+			         url="resources/lectorQRBiblioteca.png"
+					 zorder="1"
+					 visible="true"
+			         ath="96"
+			         atv="26"
+					 onclick="comienza_carrusel_img1 ()"
+					 scale="0.1"
+					  alpha="0"
+			         />
+		 <style name="img1"
+					 zorder="1"
+					 distorted="false"
+			         url="resources/lectorQRBiblioteca.png"
+					 scale="1"
+					 ath="96"
+					 atv="26"
+					 alpha="1"
+			 
+					 />
+					 
+					 <!-- las acciones que deben desencadenarse.los tiempos se calculan desde el onclick.le sumas 2 sgs que tarda en producirse la accion fly_foto_out -->
+					 	<action name="comienza_carrusel_img1 ()">
+					 		if( webvr.isenabled==false,	
+					 		desactiva();
+					 		stopallsounds();
+					 		delayedcall(0.1,set (alpha,0.1););
+					 		delayedcall(0.1,set (url,resources/lectorQRBiblioteca.png););
+					 		delayedcall(0.1,fly_foto_in(););
+					 		delayedcall(5,fly_foto_out(););
+					 		delayedcall(7, loadscene(scene_ingreso););
+
+					 		);
+					 		if( webvr.isenabled,	
+					 		desactiva();
+					 		stopallsounds();
+					 		delayedcall(0.1,set (alpha,0.1););
+					 		delayedcall(0.1,set (url,resources/lectorQRBiblioteca.png););
+					 		delayedcall(0.1,fly_foto2_in(););
+					 		delayedcall(5,fly_foto2_out(););
+					 		delayedcall(7, loadscene(scene_ingreso););
+
+					 			);
+					 	</action>
+					 
+		
 
 	</scene>
 
@@ -192,7 +243,7 @@
 		</image>
 
 	</scene>
--->s
+-->
 	<scene name="scene_pasillo_1" title="Pasillo 1 (tercer piso)" onstart="" thumburl="panos/IMG_20220906_102726_00_098.tiles/thumb.jpg" lat="-3.98625000" lng="-79.19908333" heading="0.0">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
@@ -234,6 +285,68 @@
 		</image>
 
 	</scene>
+
+	<action name="fly_foto_in">
+				tween(alpha, 1 ,2);
+				tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|1.0',2, default, set(flying_state,'in'); set(capture,true); );
+	</action>
+
+	<action name="fly_foto_out">
+				tween(alpha, 0 ,2);
+				tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.1',2, default, set(flying_state,'out'); set(capture,true); );
+	</action>
+
+	<action name="flyout_hotspot">
+			for(set(i,0), i LT hotspot.count, inc(i),
+				copy(hs, hotspot[get(i)]);
+				if(hs.name != name AND hs.style == 'flyoutimage' AND (hs.flying_state == 'out' OR hs.flying_state == 'flyingout'),
+					callwith(hs, flyout_hotspot() );
+				  );
+			  );
+
+			if(flying_state == 'flyingout',
+				set(flying_state, 'flyingin');
+			  ,
+				if(flying_state == 'flyingin',
+					set(flying_state, 'flyingout');
+			  	  );
+			  );
+
+			if(flying_state == 'in',
+				calc(backup_state, '0.0|' + rx + '|' + ry + '|' + rz + '|' + scale);
+				copy(backup_zorder, zorder);
+				set(flying_state, 'flyingout');
+			  );
+
+			if(flying_state == 'out',
+				set(flying_state, 'flyingin');
+			  );
+
+			if(flying_state == 'flyingout',
+				set(zorder, 99);
+				tween(alpha, 1,2);
+							tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|1',2, default, set(flying_state,'out'); set(capture,true);
+				);
+			  );
+			 	 if(flying_state == 'flyingout' AND webvr.isenabled,
+				set(zorder, 99);
+				tween(alpha, 1 ,2);
+				tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.2',2, default, set(flying_state,'in'); set(capture,true); );		
+			  delayedcall(6.0, set(visible, false); );
+			  );
+			if(flying_state == 'flyingin',
+				sub(zorder,1);
+				tween(alpha, 0 ,2);
+				set(capture,false);
+				tween(flying|rx|ry|rz|scale, get(backup_state), 1, default, set(flying_state,'in'); copy(zorder,backup_zorder); );
+			  );
+			 if(flying_state == 'flyingin' AND webvr.isenabled,
+				sub(zorder,1);
+				tween(alpha, 0 ,2);
+				set(capture,false);
+				tween(flying|rx|ry|rz|scale, get(backup_state), 1, default, set(flying_state,'in'); copy(zorder,backup_zorder); );
+			  );
+	</action>
 
 
 </krpano>
