@@ -71,6 +71,7 @@
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 
 
+
 	
 	<scene name="scene_exterior_1" title="Exterior 1" onstart="" thumburl="panos/IMG_20220906_101218_00_089.tiles/thumb.jpg" lat="-3.98633333" lng="-79.19858333" heading="0.0">
 		
@@ -128,17 +129,17 @@
 		<image>
 			<cube url="panos/IMG_20220906_101629_00_092.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
-		
+				<!--
 		<hotspot  name="h1_ingreso" style="img1" onclick="comienza_carrusel_img1 ();" onover="tween(scale, 0.6, 0.6, easeoutback); tween(rz, 21, 0.4, easeoutback);"
         onout="tween(scale, 1, 1); tween(rz, 0, 0.6);">
 		    <point ath="2.4863285325210427" atv="7.140378442635889" />
 		    <point ath="9.128980446652179" atv="7.155493465747626" />
 		    <point ath="9.132819034554132" atv="11.583451652216459" />
 		    <point ath="2.3289181311704397" atv="11.26571860019484" />
-		</hotspot> 
-		<!--
-			<hotspot name="img1" ath="240" atv="0"  zorder="1" url="resources/lupa.png"  style="img1" rotate="360" title=""  onclick="comienza_carrusel_img1 ()" onover="tween(scale, 0.6, 0.6, easeoutback); tween(rz, 21, 0.4, easeoutback);"
-			        onout="tween(scale, 1, 1); tween(rz, 0, 0.6);"  /> -->
+		</hotspot> -->
+
+			<hotspot name="img1" ath="5.223449979084933" atv="8.4005087373606" scale="0.17999999999999927"  zorder="1" url="resources/square-blue.gif"  style="img1" rotate="360" title=""  onclick="comienza_carrusel_img1 ()" onover="tween(scale, 0.4, 0.4, easeoutback); tween(rz, 21, 0.4, easeoutback);"
+			        onout="tween(scale, 0.17999999999999927, 0.17999999999999927); tween(rz, 0, 0.6);"  /> 
 			
 		<hotspot name="img1_carrusel" style="img1"
 			         url="resources/lectorQRBiblioteca.png"
@@ -154,7 +155,7 @@
 					 zorder="1"
 					 distorted="false"
 			         url="resources/lectorQRBiblioteca.png"
-					 scale="1"
+					 scale="0.1"
 					 ath="96"
 					 atv="26"
 					 alpha="1"
@@ -289,7 +290,7 @@
 
 	<action name="fly_foto_in">
 				tween(alpha, 1 ,2);
-				tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|1.0',2, default, set(flying_state,'in'); set(capture,true); );
+				tween(flying|rx|ry|rz|scale, '1.0|0.0|0.0|0.0|0.5',2, default, set(flying_state,'in'); set(capture,true); );
 	</action>
 
 	<action name="fly_foto_out">
