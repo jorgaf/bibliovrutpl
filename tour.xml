@@ -159,8 +159,30 @@
 					 ath="96"
 					 atv="26"
 					 alpha="1"
-			 
 					 />
+					 
+					 
+					 
+			 		<hotspot name="img2_carrusel" style="img2"
+			 			         url="resources/QRExampleUTPL.png"
+			 					 zorder="1"
+			 					 visible="true"
+			 			         ath="96"
+			 			         atv="26"
+			 					 onclick="comienza_carrusel_img1 ()"
+			 					 scale="0.5"
+			 					  alpha="0"
+			 			         />
+			 		 <style name="img2"
+			 					 zorder="1"
+			 					 distorted="false"
+			 			         url="resources/QRExampleUTPL.png"
+			 					 scale="0.5"
+			 					 ath="96"
+			 					 atv="26"
+			 					 alpha="1"
+			 					 />
+			 
 					 
 					 <!-- las acciones que deben desencadenarse.los tiempos se calculan desde el onclick.le sumas 2 sgs que tarda en producirse la accion fly_foto_out -->
 					 	<action name="comienza_carrusel_img1">
@@ -170,8 +192,8 @@
 					 		delayedcall(0.1,set (alpha,0.1););
 					 		delayedcall(0.1,set (url,resources/lectorQRBiblioteca.png););
 					 		delayedcall(0.1,fly_foto_in(););
-					 		delayedcall(5,fly_foto_out(););
-					 		delayedcall(7, loadscene(scene_ingreso););
+					 		delayedcall(5,fly_foto_out(););							
+					 		delayedcall(7, comienza_carrusel_img2 (););
 
 					 		);
 					 		if( webvr.isenabled,	
@@ -181,11 +203,37 @@
 					 		delayedcall(0.1,set (url,resources/lectorQRBiblioteca.png););
 					 		delayedcall(0.1,fly_foto2_in(););
 					 		delayedcall(5,fly_foto2_out(););
+					 		delayedcall(7, comienza_carrusel_img2 (););
+
+					 			);
+					 	</action>
+						
+						
+					 	<action name="comienza_carrusel_img2">
+					 		if( webvr.isenabled==false,	
+					 		desactiva();
+					 		stopallsounds();
+					 		delayedcall(0.1,set (alpha,0.1););
+					 		delayedcall(0.1,set (url,resources/QRExampleUTPL.png););
+					 		delayedcall(0.1,fly_foto_in(););
+					 		delayedcall(5,fly_foto_out(););							
+					 		delayedcall(7, loadscene(scene_ingreso););
+
+					 		);
+					 		if( webvr.isenabled,	
+					 		desactiva();
+					 		stopallsounds();
+					 		delayedcall(0.1,set (alpha,0.1););
+					 		delayedcall(0.1,set (url,resources/QRExampleUTPL.png););
+					 		delayedcall(0.1,fly_foto2_in(););
+					 		delayedcall(5,fly_foto2_out(););
 					 		delayedcall(7, loadscene(scene_ingreso););
 
 					 			);
 					 	</action>
 					 
+					 
+					 <hotspot name="h2_ingreso" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="-6.7703416345219125" atv="16.92115551771238" scale="0.1" rx="0" ry="0" rz="11.5" onclick="loadscene (scene_central)" handcursor="false"/>
 		
 
 	</scene>
@@ -201,22 +249,12 @@
 		<image>
 			<cube url="panos/IMG_20220906_102142_00_096.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
-
-	</scene>
-
-	<scene name="scene_lectura" title="Area lectura" onstart="" thumburl="panos/IMG_20220906_101956_00_094.tiles/thumb.jpg" lat="-3.98622222" lng="-79.19866667" heading="0.0">
+	
 		
-		<control bouncinglimits="calc:image.cube ? true : false" />
-
-		<view hlookat="90.418" vlookat="6.661" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
-
-		<preview url="panos/IMG_20220906_101956_00_094.tiles/preview.jpg" />
-
-		<image>
-			<cube url="panos/IMG_20220906_101956_00_094.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
-		</image>
+		<hotspot name="h1_central" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="120.81779056903935" atv="6.790623483528508" scale="0.1" rx="0" ry="35.5" rz="40" onclick="loadscene (scene_pasillo_1)" handcursor="false"/>
 
 	</scene>
+	
 <!--
 	<scene name="scene_IMG_20220906_102257_00_097" title="IMG_20220906_102257_00_097" onstart="" thumburl="panos/IMG_20220906_102257_00_097.tiles/thumb.jpg" lat="-3.98625000" lng="-79.19908333" heading="0.0">
 		
@@ -257,6 +295,8 @@
 		<image>
 			<cube url="panos/IMG_20220906_102726_00_098.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
+		
+				<hotspot name="h1_pasillo1" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="91.51044564487478" atv="4.353660066618434" scale="0.1" rx="0" ry="35.5" rz="40" onclick="loadscene (scene_pasillo_2)" handcursor="false"/>
 
 	</scene>
 
@@ -271,6 +311,8 @@
 		<image>
 			<cube url="panos/IMG_20220906_102813_00_099.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
+		
+		<hotspot name="h1_pasillo2" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="-86.92696615347131" atv="8.503555320005567" scale="0.1989555159999391" rx="0" ry="35.5" rz="40" onclick="loadscene (scene_pasillo_3)" handcursor="false"/>
 
 	</scene>
 
@@ -284,6 +326,22 @@
 
 		<image>
 			<cube url="panos/IMG_20220906_102901_00_100.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		
+						<hotspot name="h1_central" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="-86.92696615347131" atv="8.503555320005567" scale="0.1989555159999391" rx="0" ry="35.5" rz="40" onclick="loadscene (scene_lectura)" handcursor="false"/>
+
+	</scene>
+	
+	<scene name="scene_lectura" title="Area lectura" onstart="" thumburl="panos/IMG_20220906_101956_00_094.tiles/thumb.jpg" lat="-3.98622222" lng="-79.19866667" heading="0.0">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="90.418" vlookat="6.661" fovtype="MFOV" fov="140.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/IMG_20220906_101956_00_094.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/IMG_20220906_101956_00_094.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
 
 	</scene>
