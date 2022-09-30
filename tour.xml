@@ -328,7 +328,7 @@
 			<cube url="panos/IMG_20220906_102901_00_100.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
 		
-						<hotspot name="h1_central" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="-86.92696615347131" atv="8.503555320005567" scale="0.1989555159999391" rx="0" ry="35.5" rz="40" onclick="loadscene (scene_lectura)" handcursor="false"/>
+						<hotspot name="h1_pasillo3" url="resources/lupa.png"  onover="tween(scale,0.2);" onout="tween(scale,0.1);" distorted="true"  ath="-86.92696615347131" atv="8.503555320005567" scale="0.1989555159999391" rx="0" ry="35.5" rz="40" onclick="loadscene (scene_lectura)" handcursor="false"/>
 
 	</scene>
 	
@@ -343,6 +343,23 @@
 		<image>
 			<cube url="panos/IMG_20220906_101956_00_094.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
 		</image>
+		
+		<hotspot name="video4"
+		url.html5="%SWFPATH%/plugins/videoplayer.js"
+		url.flash="%SWFPATH%/plugins/videoplayer.swf"
+		videourl="resources/videobiblioteca.mp4"
+		posterurl="resources/poster1.png"
+		distorted="true"
+		ath="104.46802104441085" atv="5.150179296349947" 
+		edge="center"
+		scale="0.5149999999999996"
+		alpha="1"
+		visible="true"
+		loop="false"
+		pausedonstart="false"
+		onclick="play();"
+					 />
+		
 
 	</scene>
 
